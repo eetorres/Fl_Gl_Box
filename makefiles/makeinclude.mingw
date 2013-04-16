@@ -1,0 +1,27 @@
+# Edmanuel Torres 24/01/2005
+
+# Thanks to Herling Alvares for give me a 
+# hand to prepare this file
+# MinGW32 is working ok now... enjoy it...
+
+CXX = g++
+
+PROG = fl_win_box
+SCRS = $(PROG).cxx fl_class_win.cxx Fl_Gl_Box.cxx
+OBJS = $(SCRS:.cxx=.o)
+
+MDIR = $(shell sh -c pwd)
+
+OPTIM = -O2 -Wall -Wno-deprecated -Wunused -Wconversion  -fno-exceptions  
+LMATH = -lm
+LDLIB = -L/mingw/lib  -mno-cygwin -mwindows -lglu32 -lopengl32 -lole32 -luuid -lcomctl32 -lwsock32 -lsupc++  
+LFLTK = -L/local/lib -lfltk -lfltk_gl
+IFLTK = -I/local/include
+
+CFLAGS = $(OPTIM) -c $(IFLTK)
+LFLAGS = $(OPTIM) $(LFLTK) $(LDLIB)
+
+.SUFFIXES:	.cxx .o .h
+
+.cxx.o: 
+	$(CXX) $(CFLAGS) $< -o $@
