@@ -3,8 +3,8 @@
 #include "fl_class_win.h"
 
 int main(void) {
-	fl_clase_win * win = new fl_clase_win();
-	win->show();
-	Fl::run();
-	return 0;
+  fl_clase_win * win = new fl_clase_win();
+  win->show();
+  Fl::run();
+  return 0;
 }

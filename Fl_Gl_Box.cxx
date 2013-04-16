@@ -56,25 +56,24 @@ Fl_Gl_Box::Fl_Gl_Box(int x,int y,int w,int h,const char *l) : Fl_Box(x,y,w,h,l)
     bkred= 0.0;
     bkgreen= 0.0;
     bkblue= 0.5;
-    
     alpha = 1.0;
-    
+
 #if !HAVE_GL
     label("OpenGL is required for this demo to operate.");
     align(FL_ALIGN_WRAP | FL_ALIGN_INSIDE);
 #endif /* !HAVE_GL */
 }
 
-// OPENGL... here we can draw what we want... maybe a simple box... 
+// OPENGL... here we can draw what we want... maybe a simple box...
 void Fl_Gl_Box::draw_gl_box(void){
     // You can guess what these functions do... don't you?
     glTranslatef(xshift, yshift, 0);
-    glRotatef(hang,0,1,0); 
+    glRotatef(hang,0,1,0);
     glRotatef(vang,1,0,0);
     glScalef(zoom,zoom,zoom);
-    
+    //
     glBegin(GL_LINES);
-    // Box color 
+    // Box color
     glColor3f(0.0,1.0,1.0);
     // top
     glVertex3f(-0.5,-0.5,0.5);
@@ -103,7 +102,7 @@ void Fl_Gl_Box::draw_gl_box(void){
     glVertex3f(-0.5,0.5, 0.5);
     glVertex3f(0.5,-0.5,-0.5);
     glVertex3f(0.5,-0.5, 0.5);
-    
+    //
     glEnd();
     //}
 #if _SHOW_MESSAGES
@@ -116,17 +115,15 @@ void Fl_Gl_Box::draw_gl_box(void){
 
 void Fl_Gl_Box::draw() {
     if (!valid()) {
-	glClearColor(bkred,bkgreen,bkblue,alpha);
+        glClearColor(bkred,bkgreen,bkblue,alpha);
         glLoadIdentity();
         glViewport(0,0,w(),h());
         glOrtho(-1,1,-1,1,-100,100);
     }
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
-    
     if(is_n_data)
-	draw_gl_box();
-
+      draw_gl_box();
     glPopMatrix();
     glFlush();
     redraw();
@@ -134,7 +131,7 @@ void Fl_Gl_Box::draw() {
 
 #endif /* HAVE_GL */
 
-// HANDLE EVENTS... these you can add your own new handle function... 
+// HANDLE EVENTS... these you can add your own new handle function...
 // send me a copy if you want I will add this here with your name and email...
 int Fl_Gl_Box::handle(int event) {
     static int last_x;
@@ -144,38 +141,38 @@ int Fl_Gl_Box::handle(int event) {
     // get current mouse position and process event
     int x = Fl::event_x();
     int y = Fl::event_y();
-	
-	switch(event) {
-	case FL_PUSH:
-		//... mouse down event ...
-		// save mouse position to track drag events
-		last_x = x;
-		last_y = y;
-		return 1;
-	case FL_DRAG:
-		delta_x = x - last_x;
-		delta_y = y - last_y;
-		last_x = x;
-		last_y = y;
-		hang += 0.2*delta_x;
-		vang += 0.2*delta_y;
-		redraw();
-		return 1;
-		/*case FL_RELEASE:   
-		... mouse up event ...
-		return 1;
-		case FL_FOCUS :
-		case FL_UNFOCUS :
-		... Return 1 if you want keyboard events, 0 otherwise
-		return 1;
-		case FL_KEYBOARD:
-		... keypress, key is in Fl::event_key(), ascii in Fl::event_text()
-		... Return 1 if you understand/use the keyboard event, 0 otherwise...
-		return 1;
-		case FL_SHORTCUT:
-		... shortcut, key is in Fl::event_key(), ascii in Fl::event_text()
-		... Return 1 if you understand/use the shortcut event, 0 otherwise...
-		return 1;*/
+
+  switch(event) {
+  case FL_PUSH:
+    //... mouse down event ...
+    // save mouse position to track drag events
+    last_x = x;
+    last_y = y;
+    return 1;
+  case FL_DRAG:
+    delta_x = x - last_x;
+    delta_y = y - last_y;
+    last_x = x;
+    last_y = y;
+    hang += 0.2*delta_x;
+    vang += 0.2*delta_y;
+    redraw();
+    return 1;
+    /*case FL_RELEASE:
+    ... mouse up event ...
+    return 1;
+    case FL_FOCUS :
+    case FL_UNFOCUS :
+    ... Return 1 if you want keyboard events, 0 otherwise
+    return 1;
+    case FL_KEYBOARD:
+    ... keypress, key is in Fl::event_key(), ascii in Fl::event_text()
+    ... Return 1 if you understand/use the keyboard event, 0 otherwise...
+    return 1;
+    case FL_SHORTCUT:
+    ... shortcut, key is in Fl::event_key(), ascii in Fl::event_text()
+    ... Return 1 if you understand/use the shortcut event, 0 otherwise...
+    return 1;*/
   default:
     // pass other events to the base class...
     return Fl_Gl_Window::handle(event);

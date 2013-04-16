@@ -51,7 +51,7 @@ class Fl_Gl_Box : public Fl_Box {
 #endif /* HAVE_GL */
 
 public:
-	
+
     Fl_Gl_Box(int x,int y,int w,int h,const char *l=0);
 
     void bgColor(float r,float g,float b);
@@ -75,10 +75,12 @@ public:
 #if HAVE_GL
     void draw_gl_box(void);
 #else
-    void draw_gl_box(void){printf("Is not posible start any OpenGL device interface\n");}
+    void draw_gl_box(void){
+      printf("Is not posible start any OpenGL device interface\n");
+    }
 #endif /* HAVE_GL */
 #if HAVE_GL
-    void draw();    
+    void draw();
 #endif /* HAVE_GL */
 
 protected:
