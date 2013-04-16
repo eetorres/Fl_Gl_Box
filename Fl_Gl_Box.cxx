@@ -8,7 +8,7 @@
 //
 // Sent me any suggestion, modification or bugs. Don't hesitate to contact
 // me for any question, I will be very grateful with your feedbacks.
-// Get the last version at 
+// Get the latest version at https://github.com/eetorres/Fl_Gl_Box
 //
 // This widget is  free  software;  you  can  redistribute  it and/or
 // modify it  under  the  terms  of  the   GNU Library General Public
