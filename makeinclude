@@ -8,14 +8,10 @@ OBJS = $(SCRS:.cxx=.o)
 
 MDIR = $(shell sh -c pwd)
 
-RDIR=/home/etorres
-FLTK=$(RDIR)/src/svn/fltk/fltk-1.3-gleam-4.3-x86_64
-
 OPTIM  = -O2 -Wall -Wno-deprecated
 LMATH = -lm
-LX11R = -L $(FLTK)/lib -lGLU -lGL -lXft -lXinerama -lX11 -lXext
+LX11R = -lGLU -lGL -lXft -lXinerama -lX11 -lXext
 LFLTK = -lfltk -lfltk_gl
-IFLAG = -I $(FLTK)
 
 CFLAGS = $(OPTIM) -c
 LFLAGS = $(OPTIM) $(LFLTK) $(LX11R)
@@ -23,4 +19,4 @@ LFLAGS = $(OPTIM) $(LFLTK) $(LX11R)
 .SUFFIXES:	.cxx .o .h
 
 .cxx.o:
-	$(CXX) $(CFLAGS) $< -o $@ $(IFLAG)
+	$(CXX) $(CFLAGS) $< -o $@
